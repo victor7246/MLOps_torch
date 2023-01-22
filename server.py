@@ -2,6 +2,7 @@
 # This file is boilerplate for the http server, and follows a strict interface.
 
 from sanic import Sanic, response
+import json
 import subprocess
 import numpy as np
 import torch
@@ -22,9 +23,9 @@ def healthcheck(request):
 # Inference POST handler at '/' is called for every http call from Banana
 @server.route('/', methods=["POST"]) 
 def inference(request):
-    data = response.json.loads(request.json)
+    data = json.loads(request.json)
     arr = np.array(data['image']).float()
-    
+
     ort_session = load_onnx_model("model.onnx")
     print ("Running inference")
     out = get_prediction(arr,ort_session)
