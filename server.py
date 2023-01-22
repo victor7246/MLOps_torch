@@ -4,6 +4,9 @@
 from sanic import Sanic, response
 import subprocess
 import numpy as np
+import torch
+
+from utils import to_numpy
 from test_onnx import get_prediction, load_onnx_model
 
 # Create the http server app
@@ -22,7 +25,7 @@ def inference(request):
     data = request.json
     arr = np.array(data['image'])
     ort_session = load_onnx_model("model.onnx")
-    out = get_prediction(arr,ort_session)
+    out = get_prediction(to_numpy(torch.Tensor(arr).float()),ort_session)
     
     return out
 
