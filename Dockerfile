@@ -15,8 +15,8 @@ ADD model.onnx .
 ADD *.py .
 
 # We add the banana boilerplate here
-ADD server.py .
+# ADD server.py .
 
-EXPOSE 8000
+# EXPOSE 8000
 
-CMD python3 -u server.py
+# CMD python3 -u server.py

@@ -1,8 +1,6 @@
 # Do not edit if deploying to Banana Serverless
 # This file is boilerplate for the http server, and follows a strict interface.
 
-# Instead, edit the init() and inference() functions in app.py
-
 from sanic import Sanic, response
 import subprocess
 
