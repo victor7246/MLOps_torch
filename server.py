@@ -22,8 +22,9 @@ def healthcheck(request):
 # Inference POST handler at '/' is called for every http call from Banana
 @server.route('/', methods=["POST"]) 
 def inference(request):
-    data = request.json
-    arr = np.array(data['image'])
+    data = response.json.loads(request.json)
+    arr = np.array(data['image']).float()
+    
     ort_session = load_onnx_model("model.onnx")
     print ("Running inference")
     out = get_prediction(arr,ort_session)
