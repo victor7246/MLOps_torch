@@ -25,8 +25,8 @@ def healthcheck(request):
 def inference(request):
     data = json.loads(request.json)
     arr = np.array(data['image']).astype(float)
-
     ort_session = load_onnx_model("model.onnx")
+    
     print ("Running inference")
     out = get_prediction(arr,ort_session)
     
