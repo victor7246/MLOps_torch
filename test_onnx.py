@@ -11,9 +11,8 @@ def load_onnx_model(path):
 
     return ort_session
 
-def get_prediction(path, ort_session):
-    im = preprocess_image(read_image(path)).float().unsqueeze(0)
-    ort_inputs = {ort_session.get_inputs()[0].name: to_numpy(im)}
+def get_prediction(im, ort_session):
+    ort_inputs = {ort_session.get_inputs()[0].name: im}
     ort_outs = ort_session.run(None, ort_inputs)
     img_out_y = ort_outs[0]
 
@@ -22,7 +21,9 @@ def get_prediction(path, ort_session):
 if __name__ == '__main__':
     image_path = sys.argv[1]
     ort_session = load_onnx_model("model.onnx")
-    img_out_y = get_prediction(image_path, ort_session)
+    im = preprocess_image(read_image(image_path))
+
+    img_out_y = get_prediction(im, ort_session)
 
     if os.path.basename(image_path) == 'n01440764_tench.jpeg':
         try:

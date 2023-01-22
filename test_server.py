@@ -1,6 +1,9 @@
 import argparse
 import os
-from test_onnx import load_onnx_model, get_prediction
+
+from utils import read_image, preprocess_image
+
+import banana_dev as banana
 
 if __name__ == '__main__':
     
@@ -20,22 +23,14 @@ if __name__ == '__main__':
 
     image_path = args.image_path
 
-    ort_session = load_onnx_model("model.onnx")
-    img_out_y = get_prediction(image_path, ort_session)
+    image = preprocess_image(read_image(image_path))
+    data = {'image': image.tolist()}
 
-    print ("Predicted class is {}".format(img_out_y))
+    api_key = "6386c6ad-ef57-4461-a44e-bab245e0fe40"
+    model_key = "5bdf58a0-3b55-4d0b-b40b-37da861aff1c"
 
-    if args.run_preset_test == True:
-        if os.path.basename(image_path) == 'n01440764_tench.jpeg':
-            try:
-                assert img_out_y == 0
-                print ("Test case for n01440764_tench passed!")
-            except AssertionError:
-                print ("Test case for n01440764_tench failed!")
-            
-        elif os.path.basename(image_path) == 'n01632777_axolotl.jpeg':
-            try:
-                assert img_out_y == 26
-                print ("Test case for n01632777_axolotl passed!")
-            except AssertionError:
-                print ("Test case for n01632777_axolotl failed!")
+    out = banana.run(api_key, model_key, data)
+
+    print (out)
+
+    
