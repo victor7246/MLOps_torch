@@ -23,9 +23,9 @@ def healthcheck(request):
 @server.route('/', methods=["POST"]) 
 def inference(request):
     data = request.json
-    arr = np.array(data['image'])
+    arr = np.array(data['image']).astype(np.float32)
     ort_session = load_onnx_model("model.onnx")
-    out = get_prediction(to_numpy(torch.Tensor(arr).float()),ort_session)
+    out = get_prediction(arr,ort_session)
     
     return out
 

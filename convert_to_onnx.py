@@ -12,6 +12,7 @@ if __name__ == '__main__':
     model = Classifier()
     model.eval()
     model.load_state_dict(torch.load(saved_model_path))
+    model.float()
     x = torch.randn(1, 3, 224, 224, requires_grad=True)
 
     # Export the model
