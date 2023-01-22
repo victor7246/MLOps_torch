@@ -26,7 +26,7 @@ def inference(request):
     arr = np.array(data['image'])
     ort_session = load_onnx_model("model.onnx")
     print ("Running inference")
-    out = get_prediction(arr.astype(float),ort_session)
+    out = get_prediction(arr,ort_session)
     
     return response.json({'predicted label': out})
 

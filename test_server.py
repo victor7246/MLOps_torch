@@ -24,7 +24,7 @@ if __name__ == '__main__':
     image_path = args.image_path
 
     image = preprocess_image(read_image(image_path))
-    data = {'image': image.tolist()}
+    data = {'image': image}
 
     api_key = "6386c6ad-ef57-4461-a44e-bab245e0fe40"
     model_key = "b176f86c-20bc-4914-a829-b9955e2aec3b" #"5bdf58a0-3b55-4d0b-b40b-37da861aff1c"
