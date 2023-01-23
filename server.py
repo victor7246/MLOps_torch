@@ -26,8 +26,6 @@ def inference(request):
     data = json.loads(request.json)
     arr = np.array(data['image']).astype(float)
 
-    print (arr.dtype)
-    
     ort_session = load_onnx_model("model.onnx")
 
     print ("Running inference")
