@@ -31,7 +31,7 @@ def inference(request):
     print ("Running inference")
     out = get_prediction(arr,ort_session)
     
-    return response.json({'predicted label': out})
+    return response.json({'predicted label': str(out)})
 
 if __name__ == '__main__':
     server.run(host='0.0.0.0', port="8000", workers=1)
