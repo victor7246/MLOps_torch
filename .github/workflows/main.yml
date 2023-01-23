@@ -34,7 +34,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: convert to ONNX
       run: |
-        python convert_torch_to_onnx.py pytorch_model_weights.pth
+        python convert_to_onnx.py pytorch_model_weights.pth
     - name: Run test case 1
       run: |
         python test_onnx.py n01440764_tench.jpeg
