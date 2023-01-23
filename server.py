@@ -24,7 +24,7 @@ def healthcheck(request):
 @server.route('/', methods=["POST"]) 
 def inference(request):
     data = json.loads(request.json)
-    arr = np.array(data['image']).astype(float)
+    arr = np.array(data['image'])
 
     ort_session = load_onnx_model("model.onnx")
 

@@ -12,7 +12,7 @@ def load_onnx_model(path):
     return ort_session
 
 def get_prediction(im, ort_session):
-    ort_inputs = {ort_session.get_inputs()[0].name: im}
+    ort_inputs = {ort_session.get_inputs()[0].name: im.astype(np.float32)}
     ort_outs = ort_session.run(None, ort_inputs)
     img_out_y = ort_outs[0]
 
