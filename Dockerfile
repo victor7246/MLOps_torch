@@ -12,8 +12,8 @@ ADD requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
 ADD model.onnx .
-ADD *.py .
-ADD *.jpeg .
+ADD *.py /
+ADD *.jpeg /
 
 # We add the banana boilerplate here
 ADD server.py .
